@@ -1,5 +1,7 @@
 package ThreadPool;
 
+import java.util.concurrent.TimeUnit;
+
 public class EveryTaskOneThread {
     public static void main(String[] args) {
 
@@ -9,7 +11,12 @@ public class EveryTaskOneThread {
     static class Task implements Runnable{
         @Override
         public void run() {
-            System.out.println("执行任务");
+            try {
+                TimeUnit.MICROSECONDS.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(Thread.currentThread().getName());
         }
     }
 }
